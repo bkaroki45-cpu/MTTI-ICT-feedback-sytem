@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>feedback</title>
+    <link rel="stylesheet" href="{%static 'styles/style.css'%}">
+</head>
+<body class="see">
+    <div class="see-section">
+        <h2 class="see-title">Feedback & Suggestions</h2>
+        <h3 class="see-tit">
+            please fill out the form below to provide your feedback
+            and sugestions
+        </h3>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="but" type="submit">Submit</button>
+        </form>
+        
+        
+        </div>
+    
+</body>
+</html>

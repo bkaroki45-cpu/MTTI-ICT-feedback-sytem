@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>message</title>
+    <link rel="stylesheet" href="{%static 'styles/style.css'%}">
+</head>
+<body class="message">
+    <div class="message-section">
+        <h1>Thank You</h1>
+        <p>😊</p>
+        <p>
+            your feedback and suggestions for the ICT department have been
+            successfully submitted.<br> We appreciate your input and we will use
+            to improve our <br>courses and facilities
+        </p>
+
+        <a href="{% url 'home' %}">
+            <button type="button">Go Back Home</button>
+        </a>
+    </div>
+    
+</body>
+</html>
