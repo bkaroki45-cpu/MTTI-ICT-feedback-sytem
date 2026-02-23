@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body class="home">
+    <div class="all">
+        <div class="box1">
+            <h1>Mathenge Technical Training institute</h1>
+            <h1>ICT Department</h1>
+            <p>We're glad you're here. Click the button below to provide</p>
+            <p>your feedback and suggestions</p>
+
+            <form action="{% url 'see' %}">
+                <button type="submit">Give Feedback</button>
+            </form>
+        </div>
+    <div class="about">
+        <h2 class="title1">
+            About Our Department
+        </h2>
+        <p class="abau">
+            The ICT Department at Mathenge Training Technical Institute
+            is dedicated to training competent<br>professionals in 
+            Information
+            Communication Technology. We focus on providing the 
+            <br>handskills to you our students
+        </p>
+    </div>
+    <section class="course-structure">
+
+        <h2>Course Structure</h2>
+
+        <div class="modules">
+            <div class="module-box">
+                <h3>Module 1</h3>
+                <ul>
+                    <li>Computational Mathematics</li>
+                    <li>Operating Systems</li>
+                    <li>Communication Skills</li>
+                    <li>Structured Programming</li>
+                    <li>Computer Application I</li>
+                    <li>Introduction to ICT and Ethics</li>
+                    <li>Entrepreneurship Education Project</li>
+                </ul>
+            </div>
+            <div class="module-box">
+                <h3>Module 2</h3>
+                <ul>
+                    <li>Systems Analysis and Design</li>
+                    <li>Computer Application II</li>
+                    <li>Object Oriented Programming</li>
+                    <li>Quantitative Techniques</li>
+                    <li>Visual Programming</li>
+                    <li>Database Management Systems</li>
+                </ul>
+            </div>
+            <div class="module-box">
+                <h3>Module 3</h3>
+                <ul>
+                    <li>Data Communication and Networking</li>
+                    <li>Management Information Systems</li>
+                    <li>Principles and Practice of Management</li>
+                    <li>Internet Based Programming</li>
+                    <li>Trade Project (Course Specialization Project)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <h3 class="title1">Our Mission & Vision</h3>
+    <div class="sections">
+        <div class="one">
+            <h3 class="title2">Mission</h3>
+            <p>
+                To equip student with practical ICT skills,
+                innovation mindest, and industry ready competencies
+            </p>
+        </div>
+        <div class="one">
+            <h3 class="title2">
+                Vision
+            </h3>
+            <p>
+                To be leading center of excelence in ICT Training 
+                and digital information
+            </p>
+        </div>
+        <div class="one">
+            <h3 class="title2">
+                Core Values
+            </h3>
+            <p>
+                Innovation, integrity, Excellence, Collaboration,
+                Professionalism
+            </p>
+        </div>
+    </div>
+    <footer class="foot">
+        <p>
+            @2026 ICT Department | Mathenge Technical Training Institute
+        </p>
+    </footer>
+    </div>
+    
+</body>
+</html>

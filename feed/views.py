@@ -3,7 +3,7 @@ from .form import ICTFeedbackForm
 
 # Create your views here.
 def home(request):
-    return render(request, 'feed/home.html')
+    return render(request, 'feed/index.html')
 
 def see(request):
     if request.method == 'POST':
