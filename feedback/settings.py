@@ -1,26 +1,18 @@
 from pathlib import Path
 import os
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2006'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key-for-local')
 
+DEBUG = False
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Set to False for deployment
-
-# Allow all hosts for Render
 ALLOWED_HOSTS = [
-    'https://mtti-ict-feedback-sytem.onrender.com',
+    "mtti-ict-feedback-sytem.onrender.com",
     "localhost",
-    "127.0.1",
-    ]
+    "127.0.0.1",
+]
 
-
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +43,7 @@ TEMPLATES = [
             BASE_DIR / 'templates',
             BASE_DIR / 'shared_templates'
         ],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -64,8 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'feedback.wsgi.application'
 
-
-# Database - SQLite
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -73,8 +63,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
@@ -82,19 +70,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Your local CSS & images
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # Folder for collectstatic
-
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# Remove WhiteNoise lines completely
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
