@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-zp7srm!=*tkwyfm8*!0w4m!9tu%0a4t2ed@&kek*frj)jsxpfx
 DEBUG = True  # Set to False for deployment
 
 # Allow all hosts for Render
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://mtti-ict-feedback-sytem.onrender.com']
 
 
 # Application definition
@@ -44,7 +44,7 @@ TEMPLATES = [
             BASE_DIR / 'templates',
             BASE_DIR / 'shared_templates'
         ],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
