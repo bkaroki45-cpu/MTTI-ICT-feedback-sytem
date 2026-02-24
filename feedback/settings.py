@@ -1,17 +1,23 @@
 from pathlib import Path
 import os
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zp7srm!=*tkwyfm8*!0w4m!9tu%0a4t2ed@&kek*frj)jsxpfx'
+SECRET_KEY = '2006'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # Set to False for deployment
 
 # Allow all hosts for Render
-ALLOWED_HOSTS = ['https://mtti-ict-feedback-sytem.onrender.com']
+ALLOWED_HOSTS = [
+    'https://mtti-ict-feedback-sytem.onrender.com',
+    "localhost",
+    "127.0.1",
+    ]
 
 
 # Application definition
