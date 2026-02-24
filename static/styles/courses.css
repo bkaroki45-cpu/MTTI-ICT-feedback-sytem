@@ -1,0 +1,169 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.courses-page {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* Courses Section */
+.courses {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.courses h2 {
+    font-size: 36px;
+    color: #1e3c72;
+    margin-bottom: 15px;
+}
+
+.courses .intro {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+/* Table Styling */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+}
+
+thead {
+    background: #2a5298;
+    color: #fff;
+}
+
+thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+}
+
+tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background: #f1f5f9;
+}
+
+tbody tr:hover {
+    background: #d0e1ff;
+    transform: scale(1.01);
+    transition: 0.3s;
+}
+
+/* Highlights Section */
+.highlights {
+    background: #1e3c72;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.highlights h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.highlights ul {
+    list-style: none;
+    max-width: 800px;
+    margin: auto;
+    text-align: left;
+    padding-left: 0;
+}
+
+.highlights ul li {
+    margin-bottom: 15px;
+    font-size: 18px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.highlights ul li::before {
+    content: '✔';
+    color: #00c6ff;
+    position: absolute;
+    left: 0;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    color: #aaa;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .courses h2, .highlights h2 {
+        font-size: 28px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+
+    tbody td::before {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        white-space: nowrap;
+        font-weight: 600;
+        content: attr(data-label);
+        color: #1e3c72;
+    }
+}

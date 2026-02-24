@@ -1,89 +1,68 @@
 from django.db import models
 
-from django.db import models
-
-
 class ICTFeedback(models.Model):
 
-    # 1. General Experience
-    overall_experience = models.TextField(blank=True)
-    recommendation = models.TextField(blank=True)
-    training_satisfaction = models.TextField(blank=True)
+    YES_NO = [
+        ('Yes', 'Yes'),
+        ('No', 'No'),
+    ]
 
-    # 2. Teaching & Lecturers
-    instructor_effectiveness = models.TextField(blank=True)
-    lesson_clarity = models.TextField(blank=True)
-    practical_examples = models.TextField(blank=True)
-    student_participation = models.TextField(blank=True)
+    RATING = [
+        (1, '1 - Very Poor'),
+        (2, '2 - Poor'),
+        (3, '3 - Average'),
+        (4, '4 - Good'),
+        (5, '5 - Excellent'),
+    ]
 
-    # 3. Course Content & Curriculum
-    industry_relevance = models.TextField(blank=True)
-    module_structure = models.TextField(blank=True)
+    # 1️⃣ General Experience
+    overall_experience = models.IntegerField(choices=RATING, null=True, blank=True)
+    recommendation = models.CharField(max_length=10, choices=YES_NO, blank=True)
+    training_satisfaction = models.IntegerField(choices=RATING, null=True, blank=True)
+
+    # 2️⃣ Teaching & Lecturers
+    instructor_effectiveness = models.IntegerField(choices=RATING, null=True, blank=True)
+    lesson_clarity = models.IntegerField(choices=RATING, null=True, blank=True)
+    practical_examples = models.IntegerField(choices=RATING, null=True, blank=True)
+
+    # 3️⃣ Course Content
+    industry_relevance = models.IntegerField(choices=RATING, null=True, blank=True)
     most_useful_module = models.TextField(blank=True)
-    module_improvement = models.TextField(blank=True)
 
-    # 4. Practical Training
-    practical_sessions = models.TextField(blank=True)
-    lab_sessions_helpfulness = models.TextField(blank=True)
-    project_application = models.TextField(blank=True)
-    industry_readiness = models.TextField(blank=True)
+    # 4️⃣ Facilities
+    computer_lab_rating = models.IntegerField(choices=RATING, null=True, blank=True)
+    internet_reliability = models.IntegerField(choices=RATING, null=True, blank=True)
 
-    # 5. Facilities & Resources
-    computer_lab_rating = models.TextField(blank=True)
-    computer_functionality = models.TextField(blank=True)
-    software_status = models.TextField(blank=True)
-    internet_reliability = models.TextField(blank=True)
-
-    # 6. Student Support
-    technical_support = models.TextField(blank=True)
-    academic_guidance = models.TextField(blank=True)
-    communication_effectiveness = models.TextField(blank=True)
-
-    # 7. Improvement & Suggestions
+    # 5️⃣ Suggestions
     department_improvement = models.TextField(blank=True)
-    additional_courses = models.TextField(blank=True)
-    training_quality_suggestions = models.TextField(blank=True)
     additional_comments = models.TextField(blank=True)
 
     submitted_at = models.DateTimeField(auto_now_add=True)
 
-    
-    
-def __str__(self):
-    return (
-        f"\n--- Feedback #{self.id} ---\n"
-        f"Submitted at: {self.submitted_at}\n\n"
+    def __str__(self):
+        return (
+            f"\n--- Feedback #{self.id} ---\n"
+            f"Submitted at: {self.submitted_at}\n\n"
 
-        f"Overall Experience: {self.overall_experience}\n"
-        f"Recommendation: {self.recommendation}\n"
-        f"Training Satisfaction: {self.training_satisfaction}\n\n"
+            f"=== General Experience ===\n"
+            f"Overall Experience: {self.get_overall_experience_display()}\n"
+            f"Recommendation: {self.recommendation}\n"
+            f"Training Satisfaction: {self.get_training_satisfaction_display()}\n\n"
 
-        f"Instructor Effectiveness: {self.instructor_effectiveness}\n"
-        f"Lesson Clarity: {self.lesson_clarity}\n"
-        f"Practical Examples: {self.practical_examples}\n"
-        f"Student Participation: {self.student_participation}\n\n"
+            f"=== Teaching & Lecturers ===\n"
+            f"Instructor Effectiveness: {self.get_instructor_effectiveness_display()}\n"
+            f"Lesson Clarity: {self.get_lesson_clarity_display()}\n"
+            f"Practical Examples: {self.get_practical_examples_display()}\n\n"
 
-        f"Industry Relevance: {self.industry_relevance}\n"
-        f"Module Structure: {self.module_structure}\n"
-        f"Most Useful Module: {self.most_useful_module}\n"
-        f"Module Improvement: {self.module_improvement}\n\n"
+            f"=== Course Content ===\n"
+            f"Industry Relevance: {self.get_industry_relevance_display()}\n"
+            f"Most Useful Module: {self.most_useful_module}\n\n"
 
-        f"Practical Sessions: {self.practical_sessions}\n"
-        f"Lab Helpfulness: {self.lab_sessions_helpfulness}\n"
-        f"Project Application: {self.project_application}\n"
-        f"Industry Readiness: {self.industry_readiness}\n\n"
+            f"=== Facilities ===\n"
+            f"Computer Lab Rating: {self.get_computer_lab_rating_display()}\n"
+            f"Internet Reliability: {self.get_internet_reliability_display()}\n\n"
 
-        f"Computer Lab Rating: {self.computer_lab_rating}\n"
-        f"Computer Functionality: {self.computer_functionality}\n"
-        f"Software Status: {self.software_status}\n"
-        f"Internet Reliability: {self.internet_reliability}\n\n"
-
-        f"Technical Support: {self.technical_support}\n"
-        f"Academic Guidance: {self.academic_guidance}\n"
-        f"Communication Effectiveness: {self.communication_effectiveness}\n\n"
-
-        f"Department Improvement: {self.department_improvement}\n"
-        f"Additional Courses: {self.additional_courses}\n"
-        f"Training Quality Suggestions: {self.training_quality_suggestions}\n"
-        f"Additional Comments: {self.additional_comments}\n"
-    )
+            f"=== Suggestions ===\n"
+            f"Department Improvement: {self.department_improvement}\n"
+            f"Additional Comments: {self.additional_comments}\n"
+        )

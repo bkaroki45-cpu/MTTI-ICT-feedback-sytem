@@ -1,0 +1,195 @@
+/* Import modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.club-page {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: #111;
+    line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    padding: 100px 20px;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background: #fff;
+    color: #2575fc;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+}
+
+.btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-3px);
+}
+
+/* About Section */
+.about {
+    padding: 80px 20px;
+    background: #1c1c1c;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 36px;
+    color: #6a11cb;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Activities Section */
+.activities {
+    padding: 80px 20px;
+    background: #222;
+    text-align: center;
+}
+
+.activities h2 {
+    font-size: 36px;
+    color: #2575fc;
+    margin-bottom: 40px;
+}
+
+.activity-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.activity-card {
+    background: #1c1c1c;
+    padding: 25px;
+    width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+
+.activity-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.7);
+}
+
+.activity-card h3 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.activity-card p {
+    color: #ddd;
+}
+
+/* Gallery Section */
+.gallery {
+    padding: 80px 20px;
+    background: #1c1c1c;
+    text-align: center;
+}
+
+.gallery h2 {
+    font-size: 36px;
+    color: #6a11cb;
+    margin-bottom: 40px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 12px;
+    border: 3px solid #2575fc;
+    transition: 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    border-color: #6a11cb;
+}
+
+.gallery-note {
+    margin-top: 15px;
+    color: #aaa;
+}
+
+/* Meeting Section */
+.meeting {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    text-align: center;
+}
+
+.meeting h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.meeting p {
+    font-size: 20px;
+}
+
+/* Footer */
+footer {
+    padding: 25px 20px;
+    background: #111;
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .activity-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .about h2, .activities h2, .gallery h2, .meeting h2 {
+        font-size: 28px;
+    }
+
+    .meeting p {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,101 @@
+{% load static %}
+{% include 'feed/nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Innovators Hub</title>
+    <link rel="stylesheet" href="{% static 'styles/clubs.css' %}">
+</head>
+<body class="club-page">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ICT Innovators Hub</h1>
+            <p>Where creativity meets technology! Join us to explore coding, programming, cybersecurity, software engineering and more.</p>
+            <form action="{% url 'contacts' %}" method="get">
+                <button class="btn" type="submit">Join the Club</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>About ICT Innovators Hub</h2>
+        <p>
+            ICT Innovators Hub is the ultimate club for tech enthusiasts at the ICT Department. 
+            We foster innovation, hands-on learning, and collaboration in fields like software engineering, 
+            programming, cybersecurity, AI, web development, and much more. Whether you’re a beginner or an expert, 
+            this is the place to learn, innovate, and grow together!
+        </p>
+    </section>
+
+    <!-- Activities Section -->
+<section class="activities">
+    <h2>Our Activities</h2>
+    <div class="activity-grid">
+        <div class="activity-card">
+            <h3>Coding & Programming</h3>
+            <p>Learn and practice languages like Python, Java, C++, and more while building real projects.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Cybersecurity</h3>
+            <p>Explore ethical hacking, network security, and digital protection strategies.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Software Engineering</h3>
+            <p>Work on software projects, understand agile methodology, and improve your teamwork skills.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Web Design & Development</h3>
+            <p>Learn to create responsive, interactive websites using HTML, CSS, JavaScript, and frameworks like Django & React.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Graphics Design & Multimedia</h3>
+            <p>Create stunning visuals, banners, and digital content using tools like Photoshop, Illustrator, and Canva.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Artificial Intelligence & Data Science</h3>
+            <p>Explore AI models, machine learning, and data analysis for real-world tech applications.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Workshops & Seminars</h3>
+            <p>Participate in hands-on workshops, tech talks, and special events led by industry experts.</p>
+        </div>
+        <div class="activity-card">
+            <h3>Team Projects & Hackathons</h3>
+            <p>Collaborate with peers on exciting tech projects and compete in coding competitions and hackathons.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <h2>Our Moments at ICT Innovators Hub</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="{% static 'images/pic1.jpeg' %}" alt="Club Activity 1"></div>
+            <div class="gallery-item"><img src="{% static 'images/pic2.jpeg' %}" alt="Club Activity 2"></div>
+            <div class="gallery-item"><img src="{% static 'images/pic3.jpeg' %}" alt="Club Activity 3"></div>
+            <div class="gallery-item"><img src="{% static 'images/pic4.jpeg' %}" alt="Club Activity 4"></div>
+            <div class="gallery-item"><img src="{% static 'images/pic5.jpeg' %}" alt="Club Activity 4"></div>
+            <div class="gallery-item"><img src="{% static 'images/pic4.jpeg' %}" alt="Club Activity 4"></div>
+        </div>
+        <p class="gallery-note">Add your photos here to showcase our amazing events!</p>
+    </section>
+
+    <!-- Meeting Section -->
+    <section class="meeting" id="join">
+        <h2>Meetings</h2>
+        <p>We meet every <strong>Thursday and Friday</strong> at <strong>2 PM</strong> in <strong>Jitume Lab</strong>. 
+           Come join us, bring your ideas, and let's innovate together!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 ICT Innovators Hub | ICT Department | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
