@@ -1,105 +1,68 @@
-{% load static %}
-{% include 'feed/nav.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ICT Feedback Form</title>
-    <link rel="stylesheet" href="{% static 'styles/feedback.css' %}">
-</head>
-<body class="feedback">
+{% extends 'feed/layout.html' %}
+{% block title %}Submit Feedback | MTTI{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>{% if department %}Feedback for {{ department.name }}{% else %}Institutional Feedback System{% endif %}</h1>
+    <p>Choose anonymous, student, staff, or guest feedback. Required identity fields depend on the feedback type you select.</p>
+</section>
 
-<div class="container">
-    <h1 class="main-title">ICT Department Feedback</h1>
-    <p class="subtitle">We value your feedback. Please rate your experience and share suggestions to help us improve.</p>
+<form class="form-card" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
 
-    <form method="POST">
-        {% csrf_token %}
+    <div class="form-row">
+        <label>Feedback type</label>
+        <div class="radio-list">{{ form.feedback_type }}</div>
+        {{ form.feedback_type.errors }}
+    </div>
 
-        <!-- 1️⃣ General Experience -->
-        <div class="section">
-            <h2>1. General Experience</h2>
-
-            <div class="form-group">
-                <label>How would you rate your overall experience with the ICT training?</label>
-                {{ form.overall_experience }}
-            </div>
-
-            <div class="form-group">
-                <label>Would you recommend this training to others?</label>
-                {{ form.recommendation }}
-            </div>
-
-            <div class="form-group">
-                <label>How satisfied are you with the training program?</label>
-                {{ form.training_satisfaction }}
-            </div>
+    <div class="grid">
+        <div class="form-group">
+            <label for="{{ form.category.id_for_label }}">Category</label>
+            {{ form.category }}
+            {{ form.category.errors }}
         </div>
-
-        <!-- 2️⃣ Teaching & Instructors -->
-        <div class="section">
-            <h2>2. Teaching & Instructors</h2>
-
-            <div class="form-group">
-                <label>How effective was the instructor in explaining the topics?</label>
-                {{ form.instructor_effectiveness }}
-            </div>
-
-            <div class="form-group">
-                <label>Were the lessons clear and easy to understand?</label>
-                {{ form.lesson_clarity }}
-            </div>
-
-            <div class="form-group">
-                <label>Did the instructor provide relevant examples that helped your understanding?</label>
-                {{ form.practical_examples }}
-            </div>
+        <div class="form-group">
+            <label for="{{ form.department.id_for_label }}">Department</label>
+            {{ form.department }}
+            <p class="help-text">Required for student and staff feedback. Optional for anonymous feedback.</p>
+            {{ form.department.errors }}
         </div>
+    </div>
 
-        <!-- 3️⃣ Course Content -->
-        <div class="section">
-            <h2>3. Course Content</h2>
-
-            <div class="form-group">
-                <label>How relevant was the content of the training to industry needs?</label>
-                {{ form.industry_relevance }}
-            </div>
+    <div class="grid">
+        <div class="form-group">
+            <label for="{{ form.admission_number.id_for_label }}">Admission Number</label>
+            {{ form.admission_number }}
+            {{ form.admission_number.errors }}
         </div>
-
-        <!-- 4️⃣ Facilities -->
-        <div class="section">
-            <h2>4. Facilities</h2>
-
-            <div class="form-group">
-                <label>How would you rate the computer lab facilities?</label>
-                {{ form.computer_lab_rating }}
-            </div>
-
-            <div class="form-group">
-                <label>How reliable was the internet connection during the training?</label>
-                {{ form.internet_reliability }}
-            </div>
+        <div class="form-group">
+            <label for="{{ form.student_class.id_for_label }}">Class</label>
+            {{ form.student_class }}
+            {{ form.student_class.errors }}
         </div>
-
-        <!-- 5️⃣ Suggestions -->
-        <div class="section">
-            <h2>5. Suggestions</h2>
-
-            <div class="form-group">
-                <label>What improvements would you suggest for the ICT department?</label>
-                {{ form.department_improvement }}
-            </div>
-
-            <div class="form-group">
-                <label>Any additional comments or feedback?</label>
-                {{ form.additional_comments }}
-            </div>
+        <div class="form-group">
+            <label for="{{ form.full_name.id_for_label }}">Staff Full Name</label>
+            {{ form.full_name }}
+            {{ form.full_name.errors }}
         </div>
+        <div class="form-group">
+            <label for="{{ form.guest_name.id_for_label }}">Guest Name</label>
+            {{ form.guest_name }}
+            {{ form.guest_name.errors }}
+        </div>
+    </div>
 
-        <button type="submit" class="submit-btn">Submit Feedback</button>
-
-    </form>
-</div>
-
-</body>
-</html>
+    <div class="form-group">
+        <label for="{{ form.message.id_for_label }}">Message</label>
+        {{ form.message }}
+        {{ form.message.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.attachment.id_for_label }}">Attach file/image</label>
+        {{ form.attachment }}
+        {{ form.attachment.errors }}
+    </div>
+    <button class="btn" type="submit">Submit Feedback</button>
+</form>
+{% endblock %}

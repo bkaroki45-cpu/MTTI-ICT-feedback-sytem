@@ -1,0 +1,59 @@
+{% extends 'feed/layout.html' %}
+{% block title %}Admin Dashboard | MTTI{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>Institutional Analytics Dashboard</h1>
+    <p>Monitor feedback volume, routing, categories, and resolution progress. Full editing, replies, and CSV export are available in Django admin.</p>
+    <div class="actions">
+        <a class="btn" href="/admin/feed/feedback/">Manage Feedback</a>
+        <a class="btn-secondary" href="/admin/feed/event/">Manage Events</a>
+        <a class="btn-secondary" href="/admin/feed/announcement/">Manage Announcements</a>
+    </div>
+</section>
+<section class="dashboard-grid">
+    <div class="stat-card"><strong>{{ total_feedback }}</strong><span>Total feedback</span></div>
+    <div class="stat-card"><strong>{{ pending_feedback }}</strong><span>Pending</span></div>
+    <div class="stat-card"><strong>{{ resolved_feedback }}</strong><span>Resolved</span></div>
+</section>
+<section class="section">
+    <div class="grid">
+        <div class="card">
+            <h2>Most Active Departments</h2>
+            {% for row in feedback_by_department %}
+                <p>{{ row.department__name|default:"General" }}: <strong>{{ row.total }}</strong></p>
+            {% empty %}
+                <p class="muted">No feedback data yet.</p>
+            {% endfor %}
+        </div>
+        <div class="card">
+            <h2>Complaints vs Suggestions</h2>
+            {% for row in feedback_by_category %}
+                <p>{{ row.category|title }}: <strong>{{ row.total }}</strong></p>
+            {% empty %}
+                <p class="muted">No category data yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="card">
+        <h2>Recent Feedback</h2>
+        <table class="table">
+            <thead><tr><th>Date</th><th>Department</th><th>Type</th><th>Category</th><th>Status</th></tr></thead>
+            <tbody>
+                {% for item in recent_feedback %}
+                <tr>
+                    <td>{{ item.created_at|date:"M d, H:i" }}</td>
+                    <td>{{ item.department|default:"General" }}</td>
+                    <td>{{ item.get_feedback_type_display }}</td>
+                    <td>{{ item.get_category_display }}</td>
+                    <td>{{ item.get_status_display }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">No feedback has been submitted.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

@@ -1,38 +1,18 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>courses</title>
-<link rel="stylesheet" href="{% static 'styles/nav.css' %}">
-</head>
-<body>
-     <!-- header -->
-    <header class="main-header">
-
-        <div class="header-container">
-
-            <div class="logo-section">
-                <img src="{% static 'images/schoollogo.png' %}" alt="School Logo">
-                <div class="logo-text">
-                    <h1>Mathenge Technical Training Institute</h1>
-                    <p>ICT Department Feedback System</p>
-                </div>
-            </div>
-
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
-                    <li><a href="{% url 'feedback' %}">Feedback Questions</a></li>
-                    <li><a href="{% url 'clubs' %}">Clubs</a></li>
-                    <li><a href="{% url 'courses' %}">Courses</a></li>
-                    <li><a href="{% url 'contacts' %}">Contacts</a></li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>
-</body>
-</html>
-  
+<header class="main-header">
+    <div class="header-container">
+        <a class="brand" href="{% url 'home' %}">
+            <img src="{% static 'images/schoollogo.png' %}" alt="Mathenge Technical Training Institute logo">
+            <span>
+                <strong>Mathenge Technical Training Institute</strong>
+                <small>Institutional Feedback & Engagement Portal</small>
+            </span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'departments' %}">Departments</a>
+            <a href="{% url 'events' %}">Events</a>
+            <a href="{% url 'feedback' %}">Feedback System</a>
+        </nav>
+    </div>
+</header>

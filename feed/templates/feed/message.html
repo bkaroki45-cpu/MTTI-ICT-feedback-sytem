@@ -1,26 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>message</title>
-    <link rel="stylesheet" href="{%static 'styles/message.css'%}">
-</head>
-<body class="message">
-    <div class="message-section">
-        <h1>Thank You</h1>
-        <p>😊</p>
-        <p>
-            your feedback and suggestions for the ICT department have been
-            successfully submitted.<br> We appreciate your input and we will use
-            to improve our <br>courses and facilities
-        </p>
-
-        <a href="{% url 'home' %}">
-            <button type="button">Go Back Home</button>
-        </a>
+{% extends 'feed/layout.html' %}
+{% block title %}Feedback Submitted | MTTI{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>Thank You</h1>
+    <p>Your feedback has been submitted successfully. The relevant office can review, route, and resolve it through the administration dashboard.</p>
+    <div class="actions">
+        <a class="btn" href="{% url 'home' %}">Go Home</a>
+        <a class="btn-secondary" href="{% url 'feedback' %}">Submit Another</a>
     </div>
-    
-</body>
-</html>
+</section>
+{% endblock %}

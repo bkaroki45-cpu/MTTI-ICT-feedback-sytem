@@ -1,0 +1,31 @@
+{% extends 'feed/layout.html' %}
+{% block title %}{{ department.name }} | MTTI{% endblock %}
+{% block content %}
+<section class="page-header">
+    <span class="badge">{{ department.get_unit_type_display }}</span>
+    <h1>{{ department.name }}</h1>
+    <p>{{ department.description }}</p>
+    <div class="actions">
+        <a class="btn" href="{% url 'department_feedback' department.slug %}">Submit Feedback to this Department</a>
+        <a class="btn-secondary" href="{% url 'departments' %}">All Departments</a>
+    </div>
+</section>
+<section class="section">
+    <div class="grid">
+        <div class="card">
+            <h2>Staff Contacts</h2>
+            <p><strong>Contact person:</strong> {{ department.staff_contact|default:"To be updated by administration" }}</p>
+            <p><strong>Email:</strong> {{ department.contact_email|default:"To be updated" }}</p>
+            <p><strong>Phone:</strong> {{ department.contact_phone|default:"To be updated" }}</p>
+        </div>
+        <div class="card">
+            <h2>Permitted Previous Feedback</h2>
+            {% for item in permitted_feedback %}
+                <p><strong>{{ item.get_category_display }}</strong><br>{{ item.message|truncatewords:24 }}</p>
+            {% empty %}
+                <p class="muted">No public resolved feedback is available for this department.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

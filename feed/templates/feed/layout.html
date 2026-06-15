@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MTTI Feedback & Engagement Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/portal.css' %}">
+</head>
+<body>
+    {% include 'feed/nav.html' %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <p>&copy; 2026 Mathenge Technical Training Institute. Feedback, communication, and service improvement portal.</p>
+    </footer>
+</body>
+</html>
