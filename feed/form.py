@@ -29,7 +29,8 @@ class FeedbackForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["department"].queryset = Department.objects.filter(is_active=True)
         self.fields["message"].required = True
-        self.fields["category"].required = True
+        self.fields["category"].required = False
+        self.fields["department"].required = False
         self.fields["attachment"].required = False
 
         if department:
@@ -44,7 +45,22 @@ class FeedbackForm(forms.ModelForm):
         cleaned_data = super().clean()
         feedback_type = cleaned_data.get("feedback_type")
 
+        if feedback_type in {Feedback.ANONYMOUS, Feedback.GUEST}:
+            cleaned_data["category"] = Feedback.OTHER
+            cleaned_data["department"] = None
+            cleaned_data["admission_number"] = ""
+            cleaned_data["student_class"] = ""
+            cleaned_data["full_name"] = ""
+
+        if feedback_type == Feedback.ANONYMOUS:
+            cleaned_data["guest_name"] = ""
+
+        if feedback_type == Feedback.GUEST and not cleaned_data.get("guest_name"):
+            self.add_error("guest_name", "Name is required for guest feedback.")
+
         if feedback_type == Feedback.STUDENT:
+            if not cleaned_data.get("category"):
+                self.add_error("category", "Category is required for student feedback.")
             if not cleaned_data.get("admission_number"):
                 self.add_error("admission_number", "Admission number is required for student feedback.")
             if not cleaned_data.get("student_class"):
@@ -53,6 +69,8 @@ class FeedbackForm(forms.ModelForm):
                 self.add_error("department", "Department is required for student feedback.")
 
         if feedback_type == Feedback.STAFF:
+            if not cleaned_data.get("category"):
+                self.add_error("category", "Category is required for staff feedback.")
             if not cleaned_data.get("full_name"):
                 self.add_error("full_name", "Full name is required for staff feedback.")
             if not cleaned_data.get("department"):

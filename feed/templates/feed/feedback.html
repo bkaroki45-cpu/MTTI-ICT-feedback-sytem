@@ -3,7 +3,7 @@
 {% block content %}
 <section class="page-header">
     <h1>{% if department %}Feedback for {{ department.name }}{% else %}Institutional Feedback System{% endif %}</h1>
-    <p>Choose anonymous, student, staff, or guest feedback. Required identity fields depend on the feedback type you select.</p>
+    <p>Choose the feedback type, then complete only the fields needed for that option.</p>
 </section>
 
 <form class="form-card" method="post" enctype="multipart/form-data">
@@ -16,38 +16,38 @@
         {{ form.feedback_type.errors }}
     </div>
 
-    <div class="grid">
-        <div class="form-group">
+    <div class="grid" data-feedback-section="routing">
+        <div class="form-group" data-feedback-field="category">
             <label for="{{ form.category.id_for_label }}">Category</label>
             {{ form.category }}
             {{ form.category.errors }}
         </div>
-        <div class="form-group">
+        <div class="form-group" data-feedback-field="department">
             <label for="{{ form.department.id_for_label }}">Department</label>
             {{ form.department }}
-            <p class="help-text">Required for student and staff feedback. Optional for anonymous feedback.</p>
+            <p class="help-text">Required for student and staff feedback.</p>
             {{ form.department.errors }}
         </div>
     </div>
 
-    <div class="grid">
-        <div class="form-group">
+    <div class="grid" data-feedback-section="identity">
+        <div class="form-group" data-feedback-field="admission_number">
             <label for="{{ form.admission_number.id_for_label }}">Admission Number</label>
             {{ form.admission_number }}
             {{ form.admission_number.errors }}
         </div>
-        <div class="form-group">
+        <div class="form-group" data-feedback-field="student_class">
             <label for="{{ form.student_class.id_for_label }}">Class</label>
             {{ form.student_class }}
             {{ form.student_class.errors }}
         </div>
-        <div class="form-group">
+        <div class="form-group" data-feedback-field="full_name">
             <label for="{{ form.full_name.id_for_label }}">Staff Full Name</label>
             {{ form.full_name }}
             {{ form.full_name.errors }}
         </div>
-        <div class="form-group">
-            <label for="{{ form.guest_name.id_for_label }}">Guest Name</label>
+        <div class="form-group" data-feedback-field="guest_name">
+            <label for="{{ form.guest_name.id_for_label }}">Name</label>
             {{ form.guest_name }}
             {{ form.guest_name.errors }}
         </div>
@@ -65,4 +65,53 @@
     </div>
     <button class="btn" type="submit">Submit Feedback</button>
 </form>
+<script>
+    (function () {
+        const form = document.querySelector(".form-card");
+        if (!form) return;
+
+        const fields = {
+            category: form.querySelector('[data-feedback-field="category"]'),
+            department: form.querySelector('[data-feedback-field="department"]'),
+            admission_number: form.querySelector('[data-feedback-field="admission_number"]'),
+            student_class: form.querySelector('[data-feedback-field="student_class"]'),
+            full_name: form.querySelector('[data-feedback-field="full_name"]'),
+            guest_name: form.querySelector('[data-feedback-field="guest_name"]'),
+        };
+        const routing = form.querySelector('[data-feedback-section="routing"]');
+        const identity = form.querySelector('[data-feedback-section="identity"]');
+
+        function selectedType() {
+            const selected = form.querySelector('input[name="{{ form.feedback_type.html_name }}"]:checked');
+            return selected ? selected.value : "";
+        }
+
+        function setVisible(name, visible) {
+            if (!fields[name]) return;
+            fields[name].hidden = !visible;
+        }
+
+        function updateFields() {
+            const type = selectedType();
+            const isStudent = type === "student";
+            const isStaff = type === "staff";
+            const isGuest = type === "guest";
+
+            setVisible("category", isStudent || isStaff);
+            setVisible("department", isStudent || isStaff);
+            setVisible("admission_number", isStudent);
+            setVisible("student_class", isStudent);
+            setVisible("full_name", isStaff);
+            setVisible("guest_name", isGuest);
+
+            routing.hidden = !(isStudent || isStaff);
+            identity.hidden = !(isStudent || isStaff || isGuest);
+        }
+
+        form.querySelectorAll('input[name="{{ form.feedback_type.html_name }}"]').forEach(function (input) {
+            input.addEventListener("change", updateFields);
+        });
+        updateFields();
+    })();
+</script>
 {% endblock %}
