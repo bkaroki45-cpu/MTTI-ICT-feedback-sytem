@@ -9,7 +9,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in {'1', 'true', 'yes'}
 
 ALLOWED_HOSTS = os.environ.get(
     "ALLOWED_HOSTS",
-    "mtti-ict-feedback-sytem.onrender.com,localhost,127.0.0.1",
+    "mtti-ict-feedback-sytem-1.onrender.com,localhost,127.0.0.1",
 ).split(",")
 
 INSTALLED_APPS = [
