@@ -7,10 +7,20 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key-for-local')
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in {'1', 'true', 'yes'}
 
-ALLOWED_HOSTS = os.environ.get(
-    "ALLOWED_HOSTS",
-    "mtti-ict-feedback-sytem-1.onrender.com,localhost,127.0.0.1",
-).split(",")
+def env_list(name, default=""):
+    return [item.strip() for item in os.environ.get(name, default).split(",") if item.strip()]
+
+
+ALLOWED_HOSTS = env_list("ALLOWED_HOSTS", ".onrender.com,localhost,127.0.0.1")
+
+render_external_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if render_external_hostname and render_external_hostname not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_external_hostname)
+
+CSRF_TRUSTED_ORIGINS = env_list(
+    "CSRF_TRUSTED_ORIGINS",
+    "https://*.onrender.com",
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -77,11 +87,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+WHITENOISE_KEEP_ONLY_HASHED_FILES = False
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", BASE_DIR / 'media'))
 
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/'
+

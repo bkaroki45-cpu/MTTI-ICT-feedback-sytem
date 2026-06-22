@@ -15,10 +15,13 @@ venv/
 
 # Static and media files
 /staticfiles/
-media/
+media/*
+!media/event_images/
+!media/event_images/**
 
 # IDEs and editors
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
+

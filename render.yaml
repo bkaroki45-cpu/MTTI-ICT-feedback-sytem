@@ -3,11 +3,21 @@ services:
     name: mtti-feedback-system
     env: python
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
-    startCommand: gunicorn feedback.wsgi:application
+    startCommand: mkdir -p /var/data/media && cp -rn media/. /var/data/media/ 2>/dev/null || true; gunicorn feedback.wsgi:application
+    disk:
+      name: media
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       - key: DJANGO_DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: "mtti-ict-feedback-sytem.onrender.com,localhost,127.0.0.1"
+        value: ".onrender.com,localhost,127.0.0.1"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: MEDIA_ROOT
+        value: "/var/data/media"
       - key: SECRET_KEY
         generateValue: true
+
+
